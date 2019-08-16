@@ -8,22 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		49D0FE50230703DC00D929EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D0FE4F230703DC00D929EA /* AppDelegate.swift */; };
-		49D0FE52230703DC00D929EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D0FE51230703DC00D929EA /* ViewController.swift */; };
 		49D0FE55230703DC00D929EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49D0FE53230703DC00D929EA /* Main.storyboard */; };
 		49D0FE58230703DC00D929EA /* BloggerApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49D0FE56230703DC00D929EA /* BloggerApp.xcdatamodeld */; };
 		49D0FE5A230703E000D929EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49D0FE59230703E000D929EA /* Assets.xcassets */; };
 		49D0FE5D230703E000D929EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49D0FE5B230703E000D929EA /* LaunchScreen.storyboard */; };
+		49D0FE652307049C00D929EA /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D0FE642307049C00D929EA /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		49D0FE4C230703DC00D929EA /* BloggerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BloggerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49D0FE4F230703DC00D929EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		49D0FE51230703DC00D929EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		49D0FE54230703DC00D929EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49D0FE57230703DC00D929EA /* BloggerApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BloggerApp.xcdatamodel; sourceTree = "<group>"; };
 		49D0FE59230703E000D929EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49D0FE5C230703E000D929EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49D0FE5E230703E000D929EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49D0FE642307049C00D929EA /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				49D0FE4F230703DC00D929EA /* AppDelegate.swift */,
-				49D0FE51230703DC00D929EA /* ViewController.swift */,
+				49D0FE642307049C00D929EA /* TableViewController.swift */,
 				49D0FE53230703DC00D929EA /* Main.storyboard */,
 				49D0FE59230703E000D929EA /* Assets.xcassets */,
 				49D0FE5B230703E000D929EA /* LaunchScreen.storyboard */,
@@ -138,8 +138,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49D0FE52230703DC00D929EA /* ViewController.swift in Sources */,
 				49D0FE50230703DC00D929EA /* AppDelegate.swift in Sources */,
+				49D0FE652307049C00D929EA /* TableViewController.swift in Sources */,
 				49D0FE58230703DC00D929EA /* BloggerApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
