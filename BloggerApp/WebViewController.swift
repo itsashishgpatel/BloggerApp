@@ -14,24 +14,12 @@ import SystemConfiguration
 
 class WebViewController: UIViewController,WKUIDelegate {
     @IBOutlet weak var LabelDisplay: UILabel?
-
-
+    
     var bTitle:String = " "
     var contentTotal:String = " "
     var urlInitial:String = " "
-   
     
-    
-    
-  // var url1:String = "https://blogger.googleblog.com/2018/05/its-spring-cleaning-time-for-blogger.html"
-    
-//    override func loadView() {
-//        let webConfiguration = WKWebViewConfiguration()
-//        webView = WKWebView(frame: CGRect(x: 0, y: 0, width: 50, height: 50), configuration: webConfiguration)
-//        webView.uiDelegate = self
-//        view = webView
-//    }
-//    
+    // var url1:String = "https://blogger.googleblog.com/2018/05/its-spring-cleaning-time-for-blogger.html"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,45 +27,30 @@ class WebViewController: UIViewController,WKUIDelegate {
         //webView.loadHTMLString(contentTotal, baseURL: nil)
         
         let html = """
-<html>
-<head>
-
-</head>
-<body>
-<h1 style="color:red; font-size:50px" align="center">No Internet Connection</h1>
-<p style="color:red; font-size:50px" align="center"> \(urlInitial) </p>
-</body>
-
-</html>
-"""
+        <html>
+        <head>
         
+        </head>
+        <body>
+        <h1 style="color:red; font-size:50px" align="center">No Internet Connection</h1>
+        <p style="color:red; font-size:50px" align="center"> \(urlInitial) </p>
+        </body>
+        
+        </html>
+        """
         webView.loadHTMLString(html, baseURL: nil)
-        
-            print("there", bTitle)
         LabelDisplay?.text = bTitle
-   
-        let myURL = URL(string:urlInitial)
         
+        let myURL = URL(string:urlInitial)
         
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
         
-        
         if isConnectedToNetwork() == false {
             
-            
-        //    webView2.loadHTMLString("<html><body><p> No Internet Connection</p></body></html>", baseURL: nil)
-            
-                webView.loadHTMLString(html, baseURL: nil)
-            
-            //  webView.loadHTMLString(urlInitial, baseURL: nil)
-            
+            webView.loadHTMLString(html, baseURL: nil)
         }
     }
-    
-   
-    
-  
     
     @IBOutlet var webView: WKWebView!
     
@@ -104,7 +77,4 @@ class WebViewController: UIViewController,WKUIDelegate {
         
         return (isReachable && !needsConnection)
     }
-    
-    
-
 }
