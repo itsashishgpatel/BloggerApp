@@ -19,12 +19,9 @@ class WebViewController: UIViewController,WKUIDelegate {
     var contentTotal:String = " "
     var urlInitial:String = " "
     
-    // var url1:String = "https://blogger.googleblog.com/2018/05/its-spring-cleaning-time-for-blogger.html"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let webView2 = WKWebView()
-        //webView.loadHTMLString(contentTotal, baseURL: nil)
         
         let html = """
         <html>
@@ -66,7 +63,7 @@ class WebViewController: UIViewController,WKUIDelegate {
         }) else {
             return false
         }
-        
+
         var flags: SCNetworkReachabilityFlags = []
         if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
             return false

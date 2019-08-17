@@ -12,7 +12,6 @@ import CoreData
 class TableViewController: UITableViewController {
     
     var allBlogs: [NSManagedObject] = []
-    var flag:Bool = false
     var blogsFetch: [NSManagedObject] = []
     var titleFetchTotal: [String] = []
     var urlFetchTotal: [String] = []
@@ -20,7 +19,6 @@ class TableViewController: UITableViewController {
     var urlF:String = " "
     var titleOne:String = " "
     var titleTotal: [String] = []
-    var contentTotal: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,31 +36,25 @@ class TableViewController: UITableViewController {
                     for item in items! {
                         
                         let itemDictionary = item as! NSDictionary
-                        let content = itemDictionary["content"]! as!  String
-                        
-                        self.contentTotal.append(content)
-                        
                         let coreTitle = itemDictionary["title"]!
                         let coreURL = itemDictionary["url"]!
                         
-                        if self.flag == true   {
+                        let flag = UserDefaults.standard.value(forKey: "firstTime") as? Bool
+                        if   flag == nil
+                        {
                             self.save(blogTitle: coreTitle as! String,blogURL: coreURL as! String)
-                            
-                            self.flag = false
                         }
                     }
+                    UserDefaults.standard.set(true, forKey: "firstTime")
                     
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
                 }
                 catch {
-                    
-                    print ("Error in fetcing Data")
+                    NSLog("Error in fetcing Data")
                 }
-                
             }
-            
         }
         task.resume()
         
@@ -117,7 +109,8 @@ class TableViewController: UITableViewController {
             allBlogs.append(blogs)
             
         } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+            NSLog("Could not save. \(error), \(error.userInfo)")
+            
         }
     }
     
@@ -146,12 +139,11 @@ class TableViewController: UITableViewController {
             }
             
         } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+            NSLog("Could not fetch. \(error), \(error.userInfo)")
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         
         if segue.identifier == "toWebView",
             let destination = segue.destination as? WebViewController,
