@@ -7,84 +7,195 @@
 //
 
 import UIKit
+import CoreData
 
 class TableViewController: UITableViewController {
-
+   
+    var allBlogs: [NSManagedObject] = []
+    
+    var blogsFetch: [NSManagedObject] = []
+    var titleFetchTotal: [String] = []
+    var urlFetchTotal: [String] = []
+    var titleF:String = " "
+    var urlF:String = " "
+    var titleOne:String = " "
+    var titleTotal: [String] = []
+    var contentTotal: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        let url =  URL(string:"https://www.googleapis.com/blogger/v3/blogs/2399953/posts?key=AIzaSyAtvNSoDMZxs7fwkHbmmjY1KaCr3Z0SIZU")
+        
+        let task = URLSession.shared.dataTask(with: url!) { (data ,response, error) in
+        
+        if let unWrappedData = data {
+            
+            do {
+                 let jsonOutput = try JSONSerialization.jsonObject(with: unWrappedData, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
+                
+                let items = jsonOutput?["items"] as? NSArray
+           
+                for item in items! {
+                    
+                    let itemDictionary = item as! NSDictionary
+                   
+              //      let titleOfBlog = itemDictionary["title"]! as! String
+                    let content = itemDictionary["content"]! as!  String
+             //       self.titleTotal.append(titleOfBlog)
+                self.contentTotal.append(content)
+                   
+                    let coreTitle = itemDictionary["title"]!
+                    let coreURL = itemDictionary["url"]!
+                    
+                    
+               //  self.save(blogTitle: coreTitle as! String,blogURL: coreURL as! String)
+                    
+                }
+                
+            DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+            catch {
+                
+                    print ("Error in fetcing Data")
+                
+            }
+            
+          }
+        
+        }
+        task.resume()
+        
+      fetch()
+      self.tableView.reloadData()
     }
 
-    // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+       
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        return blogsFetch.count
     }
-
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        
+        let info = blogsFetch[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BlogCell",
+                                                 for: indexPath)
+        cell.textLabel?.text =
+            info.value(forKeyPath: "blogTitle") as? String
+        
         return cell
     }
-    */
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    func save(blogTitle: String,blogURL:String) {
+        
+      
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+       
+        // 1
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        // 2
+        let entity =
+            NSEntityDescription.entity(forEntityName: "Blogs",
+                                       in: managedContext)!
+        
+        let blogs = NSManagedObject(entity: entity,
+                                   insertInto: managedContext)
+        
+        // 3
+        blogs.setValue(blogTitle, forKeyPath: "blogTitle")
+        
+        blogs.setValue(blogURL  , forKeyPath: "blogURL")
+        
+        // 4
+        do {
+            try managedContext.save()
+           
+            allBlogs.append(blogs)
+           
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    //-----------------------------------------------
+    
+    
+    func fetch() {
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Blogs")
+        
+        //3
+        do {
+            blogsFetch = try managedContext.fetch(fetchRequest)
+            
+            for locValues in blogsFetch {
+                
+                 titleF   = ((locValues.value(forKeyPath: "blogTitle"))! as? String)!
+                
+                urlF = ((locValues.value(forKeyPath: "blogURL"))! as? String)!
+              
+                self.titleFetchTotal.append(titleF)
+                self.urlFetchTotal.append(urlF)
+ 
+            }
+            
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        
     }
-    */
+    
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    //-----------------------------------------------
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+      
+      
+        if segue.identifier == "toWebView",
+            let destination = segue.destination as? WebViewController,
+         
+            let index = tableView.indexPathForSelectedRow?.row
+            {
+                 titleOne = titleFetchTotal[index]
+                destination.bTitle = titleOne
+                print("here",titleOne)
+                destination.bTitle = titleOne
+                //let contentOne = contentTotal[index]
+               //destination.contentTotal = contentOne
+                 
+                   let initialUrl = urlFetchTotal[index]
+                   let midUrl = "https" + initialUrl.dropFirst(4)
+                
 
-}
+                
+                destination.urlInitial = midUrl
+               
+            }
+            
+        }
+        
+    }
+

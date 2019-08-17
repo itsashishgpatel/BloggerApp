@@ -27,13 +27,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="1ci-Ar-FfW" kind="show" identifier="toWebView" id="0K4-IM-xYy"/>
+                                    <segue destination="uvP-fU-SIC" kind="show" identifier="toWebView" id="GXL-gk-qth"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="l4Z-Ki-tzz" id="nS0-Ew-mXa"/>
-                            <outlet property="delegate" destination="l4Z-Ki-tzz" id="42d-Qx-019"/>
+                            <outlet property="dataSource" destination="l4Z-Ki-tzz" id="gNb-4Z-sMD"/>
+                            <outlet property="delegate" destination="l4Z-Ki-tzz" id="iNL-B4-9Cn"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="ivP-q8-WSl"/>
@@ -42,16 +42,16 @@
             </objects>
             <point key="canvasLocation" x="1547.8260869565217" y="116.51785714285714"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="jSW-Ok-QxX">
+        <!--Web View Controller-->
+        <scene sceneID="j7o-13-2bx">
             <objects>
-                <viewController id="1ci-Ar-FfW" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="wgg-Qi-lTV">
+                <viewController id="uvP-fU-SIC" customClass="WebViewController" customModule="BloggerApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gN3-2Z-ckW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CwB-op-Vrr">
-                                <rect key="frame" x="0.0" y="275" width="414" height="621"/>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Nf-KV-wTJ">
+                                <rect key="frame" x="0.0" y="177" width="414" height="685"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
@@ -59,21 +59,25 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Kf-Vs-TBF">
-                                <rect key="frame" x="20" y="108" width="374" height="145"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97s-Np-WsS">
+                                <rect key="frame" x="44" y="113" width="326" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="UXp-W4-LIg"/>
+                        <viewLayoutGuide key="safeArea" id="j5D-1l-dRs"/>
                     </view>
+                    <connections>
+                        <outlet property="LabelDisplay" destination="97s-Np-WsS" id="hdD-Le-FIM"/>
+                        <outlet property="webView" destination="5Nf-KV-wTJ" id="EqU-Rx-Mjp"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Lhn-ue-XvX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tqo-na-mj6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2260.8695652173915" y="115.84821428571428"/>
+            <point key="canvasLocation" x="2344.9275362318845" y="115.84821428571428"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zdh-rk-VjN">
